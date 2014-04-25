@@ -44,24 +44,24 @@ public partial class _Default : System.Web.UI.Page
             if (Product.Id == Convert.ToInt32(IdTbx.Text))
             {
                 //Så opdater antal og samlet pris
-                Product.Amount += Convert.ToInt32(PriceTbx.Text);
+                Product.Amount += Convert.ToInt32(AmountTbx.Text);
 
                 //Nu er det konstateret, at det ikke er noget nyt produkt længere
                 NewProduct = false;
             }
 
-            //Er det et nyt produkt?
-            if (NewProduct)
-            {
-                //Hvis ja, så tilføj et produkt til listen
-                Cart.Add(new ProductsInCart(
-            Convert.ToInt32(IdTbx.Text),
-            NameTbx.Text,
-            Convert.ToDecimal(PriceTbx.Text),
-            Convert.ToInt32(AmountTbx.Text)));
-            }
         }
 
+        //Er det et nyt produkt?
+        if (NewProduct)
+        {
+            //Hvis ja, så tilføj et produkt til listen
+            Cart.Add(new ProductsInCart(
+        Convert.ToInt32(IdTbx.Text),
+        NameTbx.Text,
+        Convert.ToDecimal(PriceTbx.Text),
+        Convert.ToInt32(AmountTbx.Text)));
+        }
 
 
     }
