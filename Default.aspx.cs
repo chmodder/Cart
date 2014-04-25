@@ -62,8 +62,56 @@ public partial class _Default : System.Web.UI.Page
         Convert.ToDecimal(PriceTbx.Text),
         Convert.ToInt32(AmountTbx.Text)));
         }
+    }
 
+    protected void CartGw_OnRowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        //liste kaldet "Cart" med plads til produkter
+        List<ProductsInCart> Cart = new List<ProductsInCart>();
 
+        //Henter Sessionen kurv til kurv
+        Cart = TakeCart(Cart);
+
+        //lægger produktet i kurven
+        switch (e.CommandName)
+        {
+            case "AddOne":
+                foreach (ProductsInCart Product in Cart)
+                {
+                    //Hvis produktet er fundet
+                    if (Product.Id == IdFromCommandArg)
+                    {
+                        //Så opdater antal og samlet pris
+                        Product.Amount += 1;
+                    }
+                }
+                ;
+                break;
+            case "RemoveOne":
+                foreach (ProductsInCart Product in Cart)
+                {
+                    //Hvis produktet er fundet
+                    if (Product.Id == (int)CartGw.DataKeys[Convert.ToInt32(e.CommandArgument)].Value)
+                    {
+                        //Så opdater antal og samlet pris
+                        Product.Amount -= 1;
+                    }
+                }
+                ;
+                break;
+            case "RemoveAll":
+                foreach (ProductsInCart Product in Cart)
+                {
+                    //Hvis produktet er fundet
+                    if (Product.Id == (int)CartGw.DataKeys[Convert.ToInt32(e.CommandArgument)].Value)
+                    {
+                        //Så opdater antal og samlet pris
+                        Product.Amount = 0;
+                    }
+                }
+                ;
+                break;
+        }
     }
 
     private List<ProductsInCart> TakeCart(List<ProductsInCart> Cart)
