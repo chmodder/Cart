@@ -16,7 +16,7 @@
             <asp:Label ID="AmountLbl" runat="server" Text="Antal"></asp:Label><asp:TextBox ID="AmountTbx" runat="server"></asp:TextBox><br />
             <asp:Button ID="AddToCartBtn" runat="server" Text="Put i kurv" OnClick="AddToCartBtn_Click" />
 
-            <asp:GridView ID="CartGw" runat="server" DataKeyNames="Id" OnRowCommand="CartGw_OnRowCommand">
+            <asp:GridView ID="CartGw" runat="server" DataKeyNames="id" OnRowCommand="CartGw_OnRowCommand">
                 <Columns>
                     <asp:ButtonField CommandName="AddOne" Text="+" ButtonType="Button"></asp:ButtonField>
                     <asp:ButtonField CommandName="RemoveOne" Text="-" ButtonType="Button"></asp:ButtonField>

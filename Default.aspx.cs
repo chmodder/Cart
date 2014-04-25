@@ -72,6 +72,7 @@ public partial class _Default : System.Web.UI.Page
         //Henter Sessionen kurv til kurv
         Cart = TakeCart(Cart);
 
+
         //lægger produktet i kurven
         switch (e.CommandName)
         {
@@ -112,6 +113,8 @@ public partial class _Default : System.Web.UI.Page
                 ;
                 break;
         }
+        //Vis kurv
+        ShowCart(Cart);
     }
 
     private List<ProductsInCart> TakeCart(List<ProductsInCart> Cart)
