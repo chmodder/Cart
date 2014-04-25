@@ -44,7 +44,7 @@ public partial class _Default : System.Web.UI.Page
             if (Product.Id == Convert.ToInt32(IdTbx.Text))
             {
                 //Så opdater antal og samlet pris
-                Product.Amount += Convert.ToInt32(IdTbx.Text);
+                Product.Amount += Convert.ToInt32(PriceTbx.Text);
 
                 //Nu er det konstateret, at det ikke er noget nyt produkt længere
                 NewProduct = false;
