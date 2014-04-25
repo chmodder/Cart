@@ -79,7 +79,7 @@ public partial class _Default : System.Web.UI.Page
                 foreach (ProductsInCart Product in Cart)
                 {
                     //Hvis produktet er fundet
-                    if (Product.Id == IdFromCommandArg)
+                    if (Product.Id == (int)CartGw.DataKeys[Convert.ToInt32(e.CommandArgument)].Value)
                     {
                         //Så opdater antal og samlet pris
                         Product.Amount += 1;
