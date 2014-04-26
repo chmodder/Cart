@@ -57,4 +57,18 @@ public partial class _Default : System.Web.UI.Page
         //Vis kurv
         C1Cart.ShowCart(CartGw);
     }
+    protected void ClearCartBtn_Click(object sender, EventArgs e)
+    {
+        //liste kaldet "Cart" med plads til produkter
+        Cart C1Cart = new Cart();
+
+        ////Henter Sessionen kurv til kurv
+        C1Cart.TakeCart();
+
+        //Tømmer kurven
+        C1Cart.ClearCart();
+
+        //Vis kurv
+        C1Cart.ShowCart(CartGw);
+    }
 }

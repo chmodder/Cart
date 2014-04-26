@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title></title>
 </head>
 <body>
@@ -23,6 +23,8 @@
                     <asp:ButtonField CommandName="RemoveAll" Text="Fjern" ButtonType="Button"></asp:ButtonField>
                 </Columns>
             </asp:GridView>
+            
+            <asp:Button ID="ClearCartBtn" runat="server" Text="Tøm kurv" OnClick="ClearCartBtn_Click" />
 
         </div>
     </form>
