@@ -32,10 +32,10 @@ public class Cart
     /// Creates new list of type ProductsInCart (which is a class type).
     /// </summary>
     public Cart()
-    {
+	{
         //liste kaldet "Cart" med plads til produkter
         CartList = new List<ProductsInCart>();
-    }
+	}
 
     #endregion
 
@@ -52,19 +52,19 @@ public class Cart
         if (HttpContext.Current.Session["Cart"] == null)
         {
             //Så oprettes en Session Cart med værdien List Cart
-            HttpContext.Current.Session.Add("Cart", CartList);
+        HttpContext.Current.Session.Add("Cart", CartList);
         }
 
         //Sæt "List Cart" lig med "Session Cart"
         CartList = (List<ProductsInCart>)HttpContext.Current.Session["Cart"];
-
+        
     }
 
     //unsure about syntax for now, or if it is possible to add default parameters this way
-    //    public void AddToCart() : this(0,"",0,0);
-    //{
-
-    //}
+//    public void AddToCart() : this(0,"",0,0);
+//{
+    
+//}
 
     /// <summary>
     /// Adds item to Cart (not finished)
@@ -175,15 +175,11 @@ public class Cart
     }
 
     /// <summary>
-    /// Removes all items from Cart.
+    /// Removes all items from Cart. (Not implemented Yet)
     /// </summary>
-    public void ClearCart()
+    public void EmptyCart()
     {
-        if (CartList != null)
-        {
-            CartList.Clear();
-        }
-        
+        throw new NotImplementedException();
     }
 
     #endregion
