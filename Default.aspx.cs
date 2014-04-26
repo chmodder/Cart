@@ -15,13 +15,10 @@ public partial class _Default : System.Web.UI.Page
     protected void AddToCartBtn_Click(object sender, EventArgs e)
     {
         ////liste kaldet "Cart" med plads til produkter
-        //List<ProductsInCart> Cart = new List<ProductsInCart>();
-        ////evt. smide den i Cart klassens constructor
         Cart C1Cart = new Cart();
 
         ////Henter Sessionen kurv til kurv
         C1Cart.TakeCart();
-        
 
         ////lægger produktet i kurven. Kan evt. videreudbygges til at hente parametre fra DB
         C1Cart.AddToCart(IdTbx.Text, NameTbx.Text, PriceTbx.Text, AmountTbx.Text);

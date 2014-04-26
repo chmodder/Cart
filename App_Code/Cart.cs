@@ -10,7 +10,11 @@ using System.Web.UI.WebControls;
 /// </summary>
 public class Cart
 {
+    #region FIELDS
+
     private List<ProductsInCart> _cartList;
+
+    #endregion
 
     #region PROPERTIES
 
@@ -22,15 +26,24 @@ public class Cart
 
     #endregion
 
+    #region CONSTRUCTORS
+
+    /// <summary>
+    /// Creates new list of type ProductsInCart (which is a class type).
+    /// </summary>
     public Cart()
 	{
         //liste kaldet "Cart" med plads til produkter
-        List<ProductsInCart> CartList = new List<ProductsInCart>();
-        this._cartList = CartList;
+        CartList = new List<ProductsInCart>();
 	}
 
+    #endregion
+
+    #region METHODS
+
     /// <summary>
-    /// Take Cart (not finished!)
+    /// 1) If Session "Cart" does not exist, then a new session is created.
+    /// 2) Cart is then updated with values from Session "Cart".
     /// </summary>
     /// <param name="CartList"></param>
     public void TakeCart()
@@ -80,10 +93,10 @@ public class Cart
         {
             //Hvis ja, så tilføj et produkt til listen
             this.CartList.Add(new ProductsInCart(
-        Convert.ToInt32(Id),
-        ProductName,
-        Convert.ToDecimal(ProductPrice),
-        Convert.ToInt32(Amount)));
+                Convert.ToInt32(Id),
+                ProductName,
+                Convert.ToDecimal(ProductPrice),
+                Convert.ToInt32(Amount)));
         }
     }
 
@@ -98,7 +111,10 @@ public class Cart
         View.DataBind();
     }
 
-
+    /// <summary>
+    /// Adds 1 item to Cart. Takes 1 Argument of type DataKey
+    /// </summary>
+    /// <param name="dataKey"></param>
     public void AddOne(DataKey dataKey)
     {
         foreach (ProductsInCart Product in CartList)
@@ -113,7 +129,7 @@ public class Cart
     }
 
     /// <summary>
-    /// Removes 1 item from Cart. Takes 1 Argument of type DataKey (Still missing option for RemoveAll when Amount reaches 0)
+    /// Removes 1 item from Cart. Takes 1 Argument of type DataKey
     /// </summary>
     /// <param name="dataKey"></param>
     public void RemoveOne(DataKey dataKey)
@@ -140,6 +156,10 @@ public class Cart
         }
     }
 
+    /// <summary>
+    /// Removes all items from Cart of type indicated by Datakey. Takes 1 Argument of type DataKey
+    /// </summary>
+    /// <param name="dataKey"></param>
     public void RemoveAll(DataKey dataKey)
     {
         foreach (ProductsInCart Product in CartList)
@@ -154,8 +174,13 @@ public class Cart
         }
     }
 
+    /// <summary>
+    /// Removes all items from Cart. (Not implemented Yet)
+    /// </summary>
     public void EmptyCart()
     {
         throw new NotImplementedException();
     }
+
+    #endregion
 }
