@@ -113,7 +113,6 @@ public partial class _Default : System.Web.UI.Page
                 ;
                 break;
         }
-
         //Vis kurv
         ShowCart(Cart);
     }
