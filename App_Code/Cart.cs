@@ -39,11 +39,11 @@ public class Cart
         if (HttpContext.Current.Session["Cart"] == null)
         {
             //Så oprettes en Session Cart med værdien List Cart
-        HttpContext.Current.Session.Add("Cart", this.CartList);
+        HttpContext.Current.Session.Add("Cart", CartList);
         }
 
         //Sæt "List Cart" lig med "Session Cart"
-        this.CartList = (List<ProductsInCart>)HttpContext.Current.Session["Cart"];
+        CartList = (List<ProductsInCart>)HttpContext.Current.Session["Cart"];
         
     }
 
@@ -99,4 +99,63 @@ public class Cart
     }
 
 
+    public void AddOne(DataKey dataKey)
+    {
+        foreach (ProductsInCart Product in CartList)
+        {
+            //Hvis produktet er fundet
+            if (dataKey != null && Product.Id == (int)dataKey.Value)
+            {
+                //Så opdater antal og samlet pris
+                Product.Amount += 1;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Removes 1 item from Cart. Takes 1 Argument of type DataKey (Still missing option for RemoveAll when Amount reaches 0)
+    /// </summary>
+    /// <param name="dataKey"></param>
+    public void RemoveOne(DataKey dataKey)
+    {
+        foreach (ProductsInCart Product in CartList)
+        {
+            //Hvis produktet er fundet
+            if (dataKey != null && Product.Id == (int)dataKey.Value)
+            {
+                if (Product.Amount == 1)
+                {
+                    //Hvis Product.Amount er 1, så fortsættes til case "RemoveAll"
+                    //goto case "RemoveAll";
+                    this.RemoveAll(dataKey);
+                    break;
+                }
+                else
+                {
+                    //Så opdater antal og samlet pris
+                    Product.Amount -= 1;
+                }
+
+            }
+        }
+    }
+
+    public void RemoveAll(DataKey dataKey)
+    {
+        foreach (ProductsInCart Product in CartList)
+        {
+            //Hvis produktet er fundet
+            if (dataKey != null && Product.Id == (int)dataKey.Value)
+            {
+                //Så fjernes alle variabler der hører til Cart list af typen ProductsInCart, hvor Id'et matcher e.CommandAgument
+                CartList.Remove(Product);
+                break;
+            }
+        }
+    }
+
+    public void EmptyCart()
+    {
+        throw new NotImplementedException();
+    }
 }
