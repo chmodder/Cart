@@ -80,7 +80,8 @@ public partial class _Default : System.Web.UI.Page
                 foreach (ProductsInCart Product in Cart)
                 {
                     //Hvis produktet er fundet
-                    if (Product.Id == (int)CartGw.DataKeys[Convert.ToInt32(e.CommandArgument)].Value)
+                    var DataKey = CartGw.DataKeys[Convert.ToInt32(e.CommandArgument)];
+                    if (DataKey != null && Product.Id == (int)DataKey.Value)
                     {
                         //Så opdater antal og samlet pris
                         Product.Amount += 1;
@@ -92,10 +93,20 @@ public partial class _Default : System.Web.UI.Page
                 foreach (ProductsInCart Product in Cart)
                 {
                     //Hvis produktet er fundet
-                    if (Product.Id == (int)CartGw.DataKeys[Convert.ToInt32(e.CommandArgument)].Value)
+                    var DataKey = CartGw.DataKeys[Convert.ToInt32(e.CommandArgument)];
+                    if (DataKey != null && Product.Id == (int)DataKey.Value)
                     {
-                        //Så opdater antal og samlet pris
-                        Product.Amount -= 1;
+                        if (Product.Amount == 0)
+                        {
+                            //Hvis Product.Amount er 0, så fortsættes til case "RemoveAll"
+                            goto case "RemoveAll";
+                        }
+                        else
+                        {
+                            //Så opdater antal og samlet pris
+                            Product.Amount -= 1;
+                        }
+
                     }
                 }
                 ;
@@ -104,10 +115,12 @@ public partial class _Default : System.Web.UI.Page
                 foreach (ProductsInCart Product in Cart)
                 {
                     //Hvis produktet er fundet
-                    if (Product.Id == (int)CartGw.DataKeys[Convert.ToInt32(e.CommandArgument)].Value)
+                    var DataKey = CartGw.DataKeys[Convert.ToInt32(e.CommandArgument)];
+                    if (DataKey != null && Product.Id == (int)DataKey.Value)
                     {
-                        //Så opdater antal og samlet pris
-                        Product.Amount = 0;
+                        //Så fjernes alle variabler der hører til Cart list af typen ProductsInCart, hvor Id'et matcher e.CommandAgument
+                        Cart.Remove(Product);
+                        break;
                     }
                 }
                 ;
