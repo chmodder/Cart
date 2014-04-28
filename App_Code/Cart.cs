@@ -67,7 +67,7 @@ public class Cart
     //}
 
     /// <summary>
-    /// Adds item to Cart (not finished)
+    /// Adds item to Cart
     /// </summary>
     public void AddToCart(object Id, string ProductName, object ProductPrice, object Amount)
     {
