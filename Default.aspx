@@ -21,39 +21,6 @@
             <hr />
 
             <%--Produkter--%>
-
-            <%--<asp:SqlDataSource runat="server" ID="ProductsDbSource" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="
-                SELECT
-                    [Id],
-                    [Name],
-                    [Description],
-                    [Price],
-                    [Img],
-                    [Stock] 
-                FROM [Products]"
-                ViewStateMode="Enabled"></asp:SqlDataSource>
-
-            <asp:GridView ID="ProductsGv" runat="server" AutoGenerateColumns="False" DataKeyNames="Id,Name,Price,Stock" DataSourceID="ProductsDbSource" OnRowCommand="ProductsGv_OnRowCommand">
-
-                <Columns>
-                    <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id"></asp:BoundField>
-                    <asp:BoundField DataField="Name" HeaderText="Varenavn" SortExpression="Name"></asp:BoundField>
-                    <asp:BoundField DataField="Description" HeaderText="Beskrivelse" SortExpression="Description"></asp:BoundField>
-                    <asp:BoundField DataField="Price" HeaderText="Pris" SortExpression="Price"></asp:BoundField>
-                    <asp:TemplateField SortExpression="Img">
-                        <ItemTemplate>
-                            <asp:Image ID="ProductImg" ImageUrl='<%#"ProductImg/" + Eval("Img") %>' runat="server" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="Stock" HeaderText="Lagerantal" SortExpression="Stock"></asp:BoundField>
-                    <asp:TemplateField HeaderText="Antal der skal i kurven">
-                        <ItemTemplate>
-                            <asp:TextBox ID="AmountToCartTbx" runat="server"></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:ButtonField Text="Læg i kurv" ButtonType="Button" CommandName="AddToCart"></asp:ButtonField>
-                </Columns>
-            </asp:GridView>--%>
             
             <asp:GridView ID="ProductsGv" runat="server" AutoGenerateColumns="False" DataSourceID="ObjectDbProducts"  DataKeyNames="Id,Name,Price,Stock" OnRowCommand="ProductsGv_OnRowCommand">
                 <Columns>
@@ -82,6 +49,7 @@
 
 
             <asp:ObjectDataSource runat="server" ID="ObjectDbProducts" SelectMethod="GetAllProducts" TypeName="ProductDataAccessLayer"></asp:ObjectDataSource>
+
             <asp:GridView ID="CartGw" runat="server" DataKeyNames="id" OnRowCommand="CartGw_OnRowCommand">
                 <Columns>
                     <asp:ButtonField CommandName="AddOne" Text="+" ButtonType="Button"></asp:ButtonField>
