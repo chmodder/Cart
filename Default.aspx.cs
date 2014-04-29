@@ -77,19 +77,20 @@ public partial class _Default : System.Web.UI.Page
 
     protected void ProductsGv_OnRowCommand(object sender, GridViewCommandEventArgs e)
     {
+        #region Find Parametre til AddToCart(), som kræver 4 parametre
         int Id = Convert.ToInt32(ProductsGv.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["Id"].ToString());
         string Name = ProductsGv.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["Name"].ToString();
         float Price = float.Parse(ProductsGv.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["Price"].ToString());
         int Stock = Convert.ToInt32(ProductsGv.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["Stock"].ToString());
 
-        #region Find indholdet Fra Tekstbox I Gridview og gem det i en variabel af typen int
+        //Find indholdet Fra Tekstbox I Gridview og gem det i en variabel af typen int
+        //
         //Finder rækkenummeret der er valgt via CommanArgument "e" og gemmer den i en variabel som en integer
         //Dataen, der gemmes i varablen er nummeret i arrayet, som starter på 0, og er IKKE Id'et som tilhører rækken
         int rowIndex = Convert.ToInt32(e.CommandArgument);
 
         //gem det i en variabel af typen TextBox
         TextBox AmountToCartTbx = (TextBox)ProductsGv.Rows[rowIndex].FindControl("AmountToCartTbx");
-        //var hej = ProductsGv.DataKeys[Convert.ToInt32(e.CommandArgument)].Values.ToString();
 
         //Konverterer det til typen int
         int AmountToCart = Convert.ToInt32(AmountToCartTbx.Text);
@@ -108,7 +109,8 @@ public partial class _Default : System.Web.UI.Page
         ////Henter Sessionen kurv til kurv
         C1Cart.TakeCart();
 
-        
+        //Denne If sætning tjekker om varen er på lager
+        //Lager (stock) funktionen er ikke helt implementeret endnu. Den mangler at opdatere databasen, når man lægger varer i kurven, eller tager ting ud af kurven.
         if (Stock >= AmountToCart)
         {
             ////lægger produktet i kurven. Kan evt. videreudbygges til at hente parametre fra DB
