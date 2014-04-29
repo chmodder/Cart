@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -49,8 +50,27 @@ public class ProductDataAccessLayer
 
             ListProducts.Add(TempProduct);
         }
+
         Conn.Close();
 
         return ListProducts;
     }
+
+    public void UpdateStockData(int Id, int Stock)
+    {
+        SqlConnection Conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString());
+        SqlCommand Cmd = new SqlCommand();
+
+
+        Cmd.CommandText = @"Update Products
+                            Set Stock=@Stock
+                            WHERE Id=@Id";
+        Cmd.Parameters.AddWithValue("@Id", SqlDbType.Int).Value = Id;
+        Cmd.Parameters.AddWithValue("@Stock", SqlDbType.Int).Value = Stock;
+
+        Cmd.Connection = Conn;
+
+        Conn.Open();
+    }
+
 }
